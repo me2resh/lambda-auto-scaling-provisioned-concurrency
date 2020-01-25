@@ -1,4 +1,4 @@
-# Lambda Autoscaling Provisioned Concurrency
+# Lambda provisioned concurrency with autoscaling 
 
 Example of using lambda provisioned concurrency with autoscaling groups built in AWS SAM and GoLang
 

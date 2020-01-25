@@ -62,13 +62,25 @@ Resources:
               MaxCapacity: 5 # Working hours scaling options
               MinCapacity: 3
             Schedule: 'cron(0/1 9-17 ? * MON-FRI *)' 
-      MaxCapacity: 1 # Default scaling options
-      MinCapacity: 1
+      MaxCapacity: 0 # Default scaling options
+      MinCapacity: 0
       ResourceId: !Sub function:${HelloWorldFunction}:live
       RoleARN: !Sub arn:aws:iam::${AWS::AccountId}:role/aws-service-role/lambda.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_Lambda
       ScalableDimension: lambda:function:ProvisionedConcurrency
       ServiceNamespace: lambda
     DependsOn: HelloWorldFunctionAliaslive 
+
+# HelloWorld Function auto scaling target tracking policy
+  HelloWorldScalingPolicy:
+    Type: AWS::ApplicationAutoScaling::ScalingPolicy
+    Properties:
+      PolicyName: utilization
+      PolicyType: TargetTrackingScaling
+      ScalingTargetId: !Ref HelloWorldScalingTarget
+      TargetTrackingScalingPolicyConfiguration:
+        TargetValue: 0.8
+        PredefinedMetricSpecification:
+          PredefinedMetricType: LambdaProvisionedConcurrencyUtilization
 
 Outputs:
   HelloWorldApi:
