@@ -1,16 +1,13 @@
-# Golang + AWS SAM bootstrap
+# Lambda Autoscaling Provisioned Concurrency
 
-## How to use this repo
+Example of using lambda provisioned concurrency with autoscaling groups built in AWS SAM and GoLang
 
-Click on the green button that says "Use this template", then chose a name for your new repository.
-This will create a new repository using this one.
+There are two configurations in the template:
+- Default provisioned concurrency, set to 1
+- Working hours provisioned concurrency (Mon to Fri 9 to 5), set to minimum of 3 and maximum of 5
 
-![](how-to-use.gif)
+Cloudformation template available [here](./template.yaml)
 
-
-## Contributing to this project
-
-[Check contributing guidelines](./contributing.md)
 
 ## Setup Instructions
 
